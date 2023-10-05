@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SPARQL Dashbuilder</title>
+</head>
+<body>
+<div class="container">
+    <form th:action="@{/post}" th:method="post" id="form_id">
+        <div class="mb-3">
+            <label for="sparqlService" class="form-label">Sparql service URL</label>
+            <input id="sparqlService" name="sparqlService" th:type="text" class="form-control" placeholder="dbpedia"/>
+        </div>
+        <div class="mb-3">
+            <label for="queryString" class="form-label">Write your Sparql query</label>
+            <textarea id="queryString" name="queryString" form="form_id" th:type="text" class="form-control"
+                      required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="queryString" class="form-label">Chose Char Type</label>
+            <select id="chartType" name="chartType" class="form-control">
+                <option value="BAR">Bar</option>
+                <option value="AREA">Area</option>
+                <option value="LINE">Line</option>
+                <option value="PIE">Pie</option>
+                <option value="MAP">Map</option>
+                <option value="ALL">All</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Write name of archive</label>
+            <input id="name" name="name" th:type="text" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label for="columID" class="form-label">Write the column you want to group</label>
+            <input id="columID" name="columID" th:type="text" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <input type="submit" class="form-control btn btn-primary" value="Submit"/>
+        </div>
+    </form>
+    <div th:if="${param.error}">
+        <p class="text-center h5 text-danger -align-center -align-justify" th:text="${param.error_message}"></p>
+    </div>
+
+    <div th:if="${param.succ}">
+        <p class="text-center h5 text-success -align-center -align-justify" th:text="${param.message}"></p>
+    </div>
+</div>
+</body>
+</html>
